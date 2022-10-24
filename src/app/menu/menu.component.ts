@@ -19,4 +19,9 @@ export class MenuComponent implements OnInit {
   drop(event: CdkDragDrop<Item[]>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
   }
+
+  deleteItem(i: number) {
+    // delete the item from the array
+    this.items.splice(i, 1);
+  }
 }

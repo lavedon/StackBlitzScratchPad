@@ -16,6 +16,10 @@ export class ExampleDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  onDelete(): void {
+    this.dialogRef.close('delete');
+  }
+
   ngOnInit(): void {
   }
 
