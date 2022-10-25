@@ -20,8 +20,9 @@ export class MenuComponent implements OnInit {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
   }
 
-  deleteItem(i: number) {
+  deleteItem(i: Item) {
     // delete the item from the array
-    this.items.splice(i, 1);
+    console.log('delete item ${i}');
+    this.items = this.items.filter(item => item !== i);
   }
 }

@@ -11,19 +11,21 @@ import { AppComponent } from '../app.component';
   templateUrl: './item.component.html',
 })
 export class ItemComponent implements OnInit {
-
-  @Output() notify: EventEmitter<Item> = new EventEmitter<Item>();
-
-  @Input() item?: Item;
-  @Input() index?: number;
-
+  
   constructor(public dialog: MatDialog) {
     this.item = {
       id: 2,
       name: 'Ned the Narwhal'
     }
-    }
+
+  }
+
   ngOnInit() {}
+  @Output() delete: EventEmitter<Item> = new EventEmitter<Item>();
+
+  @Input() item?: Item;
+  @Input() index?: number;
+
   
 
   openDialog(): void {
@@ -33,10 +35,12 @@ export class ItemComponent implements OnInit {
     });
 
 
+
   dialogRef.afterClosed().subscribe(result => {
     console.log('Dialog result: ${result}');
     if (result == 'delete') {
-      this.notify.emit(this.item);
+      console.log('the user would like to delete the item');
+      this.delete.emit(this.item);
     }
   });
 }
