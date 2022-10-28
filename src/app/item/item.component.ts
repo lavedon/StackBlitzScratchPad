@@ -28,7 +28,7 @@ export class ItemComponent implements OnInit {
   @Input() index?: number;
 
   openDialog(event: Event): void {
-    // event?.stopPropagation();
+    event?.stopPropagation();
     let dialogRef = this.dialog.open(ExampleDialogComponent, {
       width: '250px',
       data: { }
