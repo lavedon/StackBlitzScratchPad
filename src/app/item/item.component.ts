@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Item } from '../item';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 import { ExampleDialogComponent } from '../example-dialog/example-dialog.component';
 import { AppComponent } from '../app.component';
@@ -26,20 +27,15 @@ export class ItemComponent implements OnInit {
   @Input() item?: Item;
   @Input() index?: number;
 
-  
-
-  openDialog(): void {
+  openDialog(event: Event): void {
+    // event?.stopPropagation();
     let dialogRef = this.dialog.open(ExampleDialogComponent, {
       width: '250px',
       data: { }
     });
 
-
-
   dialogRef.afterClosed().subscribe(result => {
-    console.log('Dialog result: ${result}');
     if (result == 'delete') {
-      console.log('the user would like to delete the item');
       this.delete.emit(this.item);
     }
   });

@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component,  } from '@angular/core';
 import { Item } from '../item';
 import { ITEMS } from '../mock-items';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -10,8 +10,13 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class MenuComponent implements OnInit { 
 
   items = ITEMS;
+  public selectedItem: Item | null;
+  public pendingValue: string;
 
-  constructor() { }
+  constructor() { 
+    this.pendingValue = "";
+    this.selectedItem = null;
+  }
 
   ngOnInit(): void {
   }
@@ -21,8 +26,23 @@ export class MenuComponent implements OnInit {
   }
 
   deleteItem(i: Item) {
-    // delete the item from the array
-    console.log('delete item ${i}');
     this.items = this.items.filter(item => item !== i);
   }
+  
+  cancel() : void {
+    this.selectedItem = null;
+  }
+
+  edit( item: Item ) : void {
+    this.pendingValue = item.name;
+    this.selectedItem = item;
+  }
+
+  processChanges() : void {
+    if ( this.pendingValue !== this.selectedItem!.name ) {
+      this.selectedItem!.name = this.pendingValue;
+    }
+    this.selectedItem = null;
+  }
+
 }

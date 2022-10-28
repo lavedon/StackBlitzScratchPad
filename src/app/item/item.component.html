@@ -1,4 +1,6 @@
 <div *ngIf="item">
     <h3>{{item.name}}</h3>
-    <fa-icon [icon]="faTrash" (click)="openDialog()"></fa-icon>
+    <div>
+        <button><fa-icon [icon]="faTrash" on-click="openDialog($event)"></fa-icon></button>
+    </div>
 </div>

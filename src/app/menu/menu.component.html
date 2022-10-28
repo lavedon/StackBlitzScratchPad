@@ -1,5 +1,20 @@
 <ul cdkDropList (cdkDropListDropped)="drop($event)">
-    <li *ngFor="let item of items" cdkDrag>
-        <app-item [item]="item" (delete)="deleteItem($event)"></app-item>
+    <li 
+    *ngFor="let item of items" cdkDrag
+    [ngSwitch]="(item === selectedItem)" >
+    <div *ngSwitchCase="true" class="editor">
+        <input
+            type="text"
+            name="value"
+            autofocus
+            [(ngModel)]="pendingValue"
+            (keydown.Enter)="processChanges()"
+            (keydown.Meta.Enter)="processChanges()"
+            (keydown.Escape)="cancel()"
+        />
+    </div>
+        <div *ngSwitchCase="false" class="item" (click)="edit(item)">
+            <app-item [item]="item" (delete)="deleteItem($event)"></app-item>
+        </div>
     </li>
 </ul>
